@@ -3,7 +3,7 @@ import { ActivityIndicator, TouchableOpacity, Text, View, Switch, Image, Animate
 import { commonStyles, lightStyles, darkStyles } from "../styles/commonStyles";
 //import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import { API, API_WHOAMI } from "../constants/API";
+import { API, API_WHOAMI, API_COACHBOOK, API_COACHBOOK2 } from "../constants/API";
 import { useDispatch, useSelector } from "react-redux";
 import { changeModeAction, deletePicAction, lightModeAction, darkModeAction } from '../redux/ducks/accountPref';
 import { logOutAction, removeLoginAction, updateLoginAction } from "../redux/ducks/blogAuth";
@@ -131,7 +131,7 @@ export default function AccountScreen({ navigation }) {
     // console.log("at getselected token=", token); //const token = await AsyncStorage.getItem("token");
     // console.log("loc=", loc);
     try {
-      const response = await axios.get('https://LHT2021.pythonanywhere.com/coachbook/' + loginuser);
+      const response = await axios.get(API + API_COACHBOOK + loginuser);
       console.log("coach response", loginuser, response.data);
       //console.log(token);
       //setPosts(response.data);
@@ -150,7 +150,7 @@ export default function AccountScreen({ navigation }) {
     // console.log("at getselected token=", token); //const token = await AsyncStorage.getItem("token");
     // console.log("loc=", loc);
     try {
-      const response = await axios.get('https://LHT2021.pythonanywhere.com/coachbook2/' + loginuser);
+      const response = await axios.get(API + API_COACHBOOK2  + loginuser);
       console.log("client response", loginuser, response.data);
       //console.log(token);
       //setPosts(response.data);

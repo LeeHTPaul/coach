@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Component } from "react";
-import { StyleSheet, Alert, Text, View, TextInput, TouchableOpacity, FlatList } from "react-native";
+import { StyleSheet, Alert, Text, View, Image, TouchableOpacity, FlatList } from "react-native";
 import { commonStyles, lightStyles, darkStyles } from "../styles/commonStyles";
-import { API, API_COACHES, API_WHOAMI, API_NEWCOACH } from "../constants/API";
+import { API, API_COACHES, API_WHOAMI, API_NEWCOACH, API_COACHM } from "../constants/API";
 import axios from "axios";
 // import { useSelector } from "react-redux";
 import {Picker} from '@react-native-picker/picker';
@@ -54,7 +54,7 @@ export default function UserScreen({ navigation }) {
     // console.log("at getselected token=", token); //const token = await AsyncStorage.getItem("token");
     console.log("loc=", loc);
     try {
-      const response = await axios.get('https://LHT2021.pythonanywhere.com/coacheM/' + loc);
+      const response = await axios.get(API + API_COACHM + loc);
       console.log("coach response", response.data);
       //console.log(token);
       //setPosts(response.data);
@@ -194,12 +194,9 @@ export default function UserScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={coaches}
-        renderItem={renderItem}
-        style={{ width: "100%" }}
-        keyExtractor={(item) => item.id.toString()}
-      />
+      {!is_coach ? <FlatList data={coaches} renderItem={renderItem} style={{ width: "100%" }} 
+          keyExtractor={(item) => item.id.toString()} /> :
+           <Image style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}  source={require('../assets/swim.jpg')} /> }
     </View>
   );
 }

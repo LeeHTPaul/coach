@@ -24,11 +24,11 @@ export default function SignInSignUpScreen({ navigation }) {
   const [isLogIn, setIsLogIn] = useState(true)
   const [confirmPassword, setConfirmPassword] = useState("")
   const [coach, setCoach] = useState(false)
-  const [location, setLocation] = useState("")
+  const [location, setLocation] = useState("East")
   const [level, setlevel] = useState("Beginner")
-  const [experience, setexperience] = useState("")
+  const [experience, setexperience] = useState("Advanced")
   const [phoneno, setPhone] = useState("")
-  const [fee, setfee] = useState(100)
+  const [fee, setfee] = useState(180)
   const dispatch = useDispatch()
   const loginname = useSelector((state) => state.auth.loginname);
   const is_coach = useSelector((state) => state.auth.is_coach);
@@ -88,11 +88,13 @@ export default function SignInSignUpScreen({ navigation }) {
   function checkcoach1(){
       setChecked('user');
       dispatch({ ...setCoachAction(), payload: false }); console.log("incheck coach false");
+      setCoach(false); console.log("after 1 coach", coach)
   }
 
   function checkcoach2(){
       setChecked('coach');
       dispatch({ ...setCoachAction(), payload: true }); console.log("incheck coach true");
+      setCoach(true); console.log("after  2 coach", coach)
   }
   async function getUsername() {
     console.log("---- Getting user name (login) ----");
@@ -126,7 +128,6 @@ export default function SignInSignUpScreen({ navigation }) {
   }
 
   async function signUp() {
-    setCoach(is_coach);
     if (password != confirmPassword || password == "") {
       setErrorText("Your passwords don't match. Check and try again.")
     } else
@@ -151,6 +152,8 @@ export default function SignInSignUpScreen({ navigation }) {
                 level,
                 location,
                 phoneno,
+                experience,
+                fee,
               });
               if (response.data.Error) {
                 // We have an error message for if the user already exists
@@ -176,7 +179,7 @@ export default function SignInSignUpScreen({ navigation }) {
 
       <Text style={styles.title}>
         {/* {isLogIn ? "Login" : "SignUp"} */}
-        "Swim Coach for Hire"
+        "Coach for Hire"
       </Text>
       <View style={styles.inputView}>
         <TextInput
@@ -230,7 +233,7 @@ export default function SignInSignUpScreen({ navigation }) {
           />
         </View>}
         {isLogIn ? <View /> :
-        <View style={{ flexDirection: "row", height: 30, borderRadius: 30, backgroundColor: "#FFC0CB", marginBottom: 20 }}><Text> Location : </Text>
+        <View style={{ flexDirection: "column", height: 30,  backgroundColor: "#FFC0CB", marginBottom: 20 }}><Text> Location : </Text>
           <Picker selectedValue={location} onValueChange={(itemValue, itemIndex) => setLocation(itemValue)}>
             <Picker.Item label="North" value="North" />
             <Picker.Item label="South" value="South" />

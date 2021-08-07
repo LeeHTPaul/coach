@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Text, View, TouchableOpacity, FlatList, RefreshControl} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import axios from "axios";
-import { API, API_POSTS } from "../constants/API";
+import { API, API_POSTS, API_COACHES } from "../constants/API";
 //import { lightStyles } from "../styles/commonStyles";
 import { commonStyles, lightStyles, darkStyles } from "../styles/commonStyles";
 import { useSelector } from "react-redux";
@@ -70,7 +70,7 @@ export default function IndexScreen({ navigation, route }) {
   async function getCoaches() {
     console.log("at getcoachs token=", token); //const token = await AsyncStorage.getItem("token");
     try {
-      const response = await axios.get('https://LHT2021.pythonanywhere.com/coaches');
+      const response = await axios.get(API + API_COACHES);
       console.log("coach response", response.data);
       //console.log(token);
       //setPosts(response.data);

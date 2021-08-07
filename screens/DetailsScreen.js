@@ -5,7 +5,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { commonStyles, lightStyles, darkStyles } from "../styles/commonStyles";
 //import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import { API, API_POSTS } from "../constants/API";
+import { API, API_POSTS, API_COACHES } from "../constants/API";
 import { useSelector } from "react-redux";
 
 export default function ShowScreen({ navigation, route }) {
@@ -44,7 +44,7 @@ export default function ShowScreen({ navigation, route }) {
     const id = route.params.id
     console.log("getPost()",route.params)
     try {
-      const response = await axios.get( 'https://LHT2021.pythonanywhere.com/coaches/' + id, {
+      const response = await axios.get( API + API_COACHES + '/' + id, {
         headers: { Authorization: `JWT ${token}` },
       })
       console.log(response.data);
